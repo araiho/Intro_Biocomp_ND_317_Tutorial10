@@ -19,7 +19,7 @@ ddSim=function(t,y,p){
 
 #define parameters, initial values and time steps for first r value
 params=c(-0.1,100)
-N0=c(10)
+N0=10
 times=1:100
 ##simulate model using ode()
 r1modelSim=ode(y=N0,times=times,func=ddSim,parms=params)
@@ -30,7 +30,7 @@ r1=ggplot(r1modelOutput,aes(x=time,y=N))+geom_line()+theme_classic()
 
 ##second r value: 
 params=c(0.1,100)
-N0=c(10)
+N0=10
 times=1:100
 ##simulate model using ode()
 r2modelSim=ode(y=N0,times=times,func=ddSim,parms=params)
@@ -41,29 +41,29 @@ r2=ggplot(r2modelOutput,aes(x=time,y=N))+geom_line()+theme_classic()
 
 ##third r value: 
 params=c(0.4,100)
-N0=c(10)
+N0=10
 times=1:100
 ##simulate model using ode()
 r3modelSim=ode(y=N0,times=times,func=ddSim,parms=params)
 #convert to datafrome for plotting purposes
 r3modelOutput=data.frame(time=r3modelSim[,1],N=r3modelSim[,2])
 #plot
-r3=ggplot(r2modelOutput,aes(x=time,y=N))+geom_line()+theme_classic()
+r3=ggplot(r3modelOutput,aes(x=time,y=N))+geom_line()+theme_classic()
 
 ##fourth r value: 
 params=c(0.8,100)
-N0=c(10)
+N0=10
 times=1:100
 ##simulate model using ode()
 r4modelSim=ode(y=N0,times=times,func=ddSim,parms=params)
 #convert to datafrome for plotting purposes
 r4modelOutput=data.frame(time=r4modelSim[,1],N=r4modelSim[,2])
 #plot
-r4=ggplot(r2modelOutput,aes(x=time,y=N))+geom_line()+theme_classic()
+r4=ggplot(r4modelOutput,aes(x=time,y=N))+geom_line()+theme_classic()
 
 ##fifth r value: 
 params=c(1.0,100)
-N0=c(10)
+N0=10
 times=1:100
 ##simulate model using ode()
 r5modelSim=ode(y=N0,times=times,func=ddSim,parms=params)
@@ -84,3 +84,4 @@ allr=data.frame(time,r1,r2,r3,r4,r5)
 
 #plot the graph:
 ggplot(data=allr) + geom_line(aes(x=time,y=r1),color="firebrick") + geom_line(aes(x=time,y=r2),color="royalblue")+ geom_line(aes(x=time,y=r3),color="mediumturquoise") +geom_line(aes(x=time,y=r4),color="forestgreen") +geom_line(aes(x=time,y=r5),color="darkorchid") + theme_classic()+ ylab("N")
+
