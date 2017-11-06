@@ -108,7 +108,7 @@ modelOutput_N0=data.frame(matrix(NA, ncol=4, nrow=length(times)))
 colnames(modelOutput_N0)=c("time", "P1", "P2","P3")
 modelOutput_N0[,1]=times
 
-# For loop for the different r values
+# For loop for the 3 different N0 values
 for(i in 1:length(N0)){
   N0=c(1,50,100)
   modelSim_N0=ode(y=N0[i], times=times, func=ddSim_N0, parms=params)
@@ -121,7 +121,6 @@ ggplot() + geom_line(data=modelOutput_N0,aes(x=time,y=P1)) +
   geom_line(data=modelOutput_N0,aes(x=time,y=P3)) +
   theme_classic() + xlab("Time") + ylab("Population Size") +
   ggtitle("The effect of different initial population size on a population")
-
 
 
 ########## Question 2 pseudo-code
