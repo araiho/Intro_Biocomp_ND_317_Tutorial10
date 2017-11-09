@@ -18,12 +18,29 @@ SIRSim=function(t,y,p){
   return(list(c(dS,dI,dR)))
 }
 
-param=c(0.0005,0.05)
+param=matrix(c(0.0005,0.005,0.0001,0.00005,0.0001,0.0002,0.0001,0.05,0.5,0.1,0.1,0.05,0.05,0.06),nrow=7,ncol=2)
 Initial=c(999,1,0)
 times=1:500
 
-modelSim=ode(y=Initial,times=times,func=SIRSim,parms=param)
+Results=data.frame(matrix(ncol=4,nrow=7))
+colnames(Results) = c('Maximum Daily Incidence','Maximum Daily Prevalance', 'Percent Affected', 'Basic Reproduction Number')
 
-modelOutput=data.frame(time=modelSim[,1],S=modelSim[,2],I=modelSim[,3],R=modelSim[,4])
+for (j in 1:nrow(param)){
+  
+  modelSim=ode(y=Initial,times=times,func=SIRSim,parms=param[j,])
+  modelOutput=data.frame(time=modelSim[,1],S=modelSim[,2],I=modelSim[,3],R=modelSim[,4])
+  Incidence=data.frame(matrix(ncol=1,nrow=499))
+  Prevalance=data.frame(matrix(ncol=1,nrow=500))
+  
+  for (i in 1:nrow(modelOutput)){
+    Incidence[i,1]=modelOutput[i+1,3]-modelOutput[i,3]
+    Prevalance[i,1]=modelOutput[i,3]/(modelOutput[i,1]+modelOutput[i,2]+modelOutput[i,3])
+  }
+  
+  Results[j,1]=max(Incidence,na.rm=T)
+  Results[j,2]=max(Prevalance,na.rm=T)
+  Results[j,3]=(modelOutput[nrow(modelOutput),3]+modelOutput[nrow(modelOutput),4])/(modelOutput[nrow(modelOutput),4]+modelOutput[nrow(modelOutput),2]+modelOutput[nrow(modelOutput),3])
+  Results[j,4]=1000*param[1,1]/param[1,2]
+}
 
-ggplot()+geom_line(data=modelOutput,aes(x=time,y=S),color="black")+geom_line(data=modelOutput,aes(x=time,y=I),color="red")+geom_line(data=modelOutput,aes(x=time,y=R),color="blue")+theme_classic()+xlab('Time (Days)')+ylab('Number of People')
+#Comment
