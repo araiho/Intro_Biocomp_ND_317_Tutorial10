@@ -18,7 +18,7 @@ SIRSim=function(t,y,p){
   return(list(c(dS,dI,dR)))
 }
 
-param=matrix(c(0.0005,0.005,0.0001,0.00005,0.0001,0.0002,0.0001,0.05,0.5,0.1,0.1,0.05,0.05,0.06),nrow=7,ncol=2)
+param=matrix(c(0.0005,0.005,0.0001,0.00005,0.0001,0.0002,0.0001,1,2,2,0.05,0.5,0.1,0.1,0.05,0.05,0.06,1,1,2),nrow=10,ncol=2)
 Initial=c(999,1,0)
 times=1:500
 
@@ -40,7 +40,7 @@ for (j in 1:nrow(param)){
   Results[j,1]=max(Incidence,na.rm=T)
   Results[j,2]=max(Prevalance,na.rm=T)
   Results[j,3]=(modelOutput[nrow(modelOutput),3]+modelOutput[nrow(modelOutput),4])/(modelOutput[nrow(modelOutput),4]+modelOutput[nrow(modelOutput),2]+modelOutput[nrow(modelOutput),3])
-  Results[j,4]=1000*param[1,1]/param[1,2]
+  Results[j,4]=1000*param[j,1]/param[j,2]
 }
 
 #Comment
