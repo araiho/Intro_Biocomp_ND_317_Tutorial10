@@ -10,8 +10,7 @@
 library(deSolve)
 library(ggplot2)
 library(reshape2)
-library(gridExtra)
-library(regexr)
+
 
 #Custom function
 popSim=function(t,y,p){
