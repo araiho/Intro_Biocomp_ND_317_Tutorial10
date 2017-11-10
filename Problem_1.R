@@ -1,5 +1,4 @@
 
-
 ### Problem 1 ###
 #Run the creation of each graph seperately (some of the same objecty names are used form figure to figure
 #and are thus overwritten). The legend ("Var2") for each figure is in the order given the exercise pdf, which is the same 
