@@ -1,3 +1,104 @@
+###EXERCISE10###
+###QUESTION 1###
+
+#SITUATION1:
+
+#Set y
+y <- c(N=10)
+
+#Set a sequence of r values
+rvec=c(-0.1, 0.1, 0.4, 0.8, 1.0)
+
+#Set times
+times <- seq(0,100,1)
+
+#Define a custom function
+ddpg <- function(time,y,parms){
+  with(as.list(c(y,parms)),{
+    dNdt = r*N*(1-N/k)
+    return(list(dNdt))
+  })
+}
+##create an empty variable, in which we will append our results for each step in the loop
+modelOutput<-NULL
+
+#loop over rvec
+for (r in rvec) {
+  #set parameters
+  parms=c(r, k=100)
+  #Generate the results of the ode
+  Results <- ode(y=y,times = times,func=ddpg, parms=parms)
+  ##append them to model output
+  modelOutput<- rbind(modelOutput, data.frame(time=Results[,1],N=Results[,2], col=r))
+}
+##plot the output
+ggplot(modelOutput,aes(x=time,y=N, group=col, color=factor(col)))+geom_line()+theme_classic()
+
+
+#SITUATION2:
+
+#Set a vector of k values
+kvec=c(10,50,100)
+
+#Set times
+times <- seq(0,100,1)
+
+#Define a custom function
+ddpg <- function(time,y,parms){
+  with(as.list(c(y,parms)),{
+    dNdt = r*N*(1-N/k)
+    return(list(dNdt))
+  })
+}
+##create an empty variable, in which we will append our results for each step in the loop
+modelOutput<-NULL
+
+#loop over rvec
+for (k in kvec) {
+  #set parameters
+  parms=c(r=0.2,k)
+  #Generate the results of the ode
+  Results <- ode(y=y,times = times,func=ddpg, parms=parms)
+  ##append them to model output
+  modelOutput<- rbind(modelOutput, data.frame(time=Results[,1],N=Results[,2], col=k))
+}
+##plot the output
+ggplot(modelOutput,aes(x=time,y=N, group=col, color=factor(col)))+geom_line()+theme_classic()
+
+
+#SITUATION3: 
+
+#Set a vector of N values
+Nvec=c(10,50,100)
+
+#Set times
+times <- seq(0,10,1)
+
+#Define a custom function
+ddpg <- function(time,y,parms){
+  N=y
+  dNdt = r*N*(1-N/k)
+  return(list(dNdt))
+  
+}
+##create an empty variable, in which we will append our results for each step in the loop
+modelOutput<-NULL
+
+#loop over rvec
+for (i in Nvec) {
+  #set parameters
+  parms=c(r=0.1,k=50)
+  #Generate the results of the ode
+  Results <- ode(y=i,times = times,func=ddpg, parms=parms)
+  ##append them to model output
+  modelOutput<- rbind(modelOutput, data.frame(time=Results[,1],N=Results[,2], col=i))
+}
+##plot the output
+ggplot(modelOutput,aes(x=time,y=N, group=col, color=factor(col)))+geom_line()+theme_classic()
+
+
+###QUESTION 2###
+
 # Load packages
 library(deSolve)
 library(ggplot2)
