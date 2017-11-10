@@ -110,7 +110,7 @@ attach(modelOutput2)
 mdi <- MDI(I)
 mdp <- MDP(S,I,R)
 pa <- PA(S,I,R)
-bpn <- BPN(params1,S,I,R)
+bpn <- BPN(params2,S,I,R)
 
 RESULTS <- rbind(RESULTS, "Case 2" = c(params2[1],params2[2],mdi,mdp,pa,bpn))
 
@@ -123,7 +123,7 @@ attach(modelOutput3)
 mdi <- MDI(I)
 mdp <- MDP(S,I,R)
 pa <- PA(S,I,R)
-bpn <- BPN(params1,S,I,R)
+bpn <- BPN(params3,S,I,R)
 
 RESULTS <- rbind(RESULTS, "Case 3" = c(params3[1],params3[2],mdi,mdp,pa,bpn))
 
@@ -135,7 +135,7 @@ attach(modelOutput4)
 mdi <- MDI(I)
 mdp <- MDP(S,I,R)
 pa <- PA(S,I,R)
-bpn <- BPN(params1,S,I,R)
+bpn <- BPN(params4,S,I,R)
 
 RESULTS <- rbind(RESULTS, "Case 4" = c(params4[1],params4[2],mdi,mdp,pa,bpn))
 
@@ -147,7 +147,7 @@ attach(modelOutput5)
 mdi <- MDI(I)
 mdp <- MDP(S,I,R)
 pa <- PA(S,I,R)
-bpn <- BPN(params1,S,I,R)
+bpn <- BPN(params5,S,I,R)
 
 RESULTS <- rbind(RESULTS, "Case 5" = c(params5[1],params5[2],mdi,mdp,pa,bpn))
 
@@ -159,7 +159,7 @@ attach(modelOutput6)
 mdi <- MDI(I)
 mdp <- MDP(S,I,R)
 pa <- PA(S,I,R)
-bpn <- BPN(params1,S,I,R)
+bpn <- BPN(params6,S,I,R)
 
 RESULTS <- rbind(RESULTS, "Case 6" = c(params6[1],params6[1],mdi,mdp,pa,bpn))
 
@@ -171,7 +171,7 @@ attach(modelOutput7)
 mdi <- MDI(I)
 mdp <- MDP(S,I,R)
 pa <- PA(S,I,R)
-bpn <- BPN(params1,S,I,R)
+bpn <- BPN(params7,S,I,R)
 
 RESULTS <- rbind(RESULTS, "Case 7" = c(params7[1],params7[2],mdi,mdp,pa,bpn))
 
