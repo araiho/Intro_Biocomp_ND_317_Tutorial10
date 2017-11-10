@@ -1,3 +1,13 @@
+#Load Packages
+library(deSolve)
+library(ggplot2)
+library(reshape2)
+library(gridExtra)
+library(regexr)
+
+
+
+
 ### Problem 1 ###
 #Run the creation of each graph seperately (some of the same objecty names are used form figure to figure
 #and are thus overwritten). The legend ("Var2") for each figure is in the order given the exercise pdf, which is the same 
@@ -6,12 +16,6 @@
 
 #Constant K, varying r
 
-#Load Packages
-library(deSolve)
-library(ggplot2)
-library(reshape2)
-library(gridExtra)
-library(regexr)
 
 #Custom function
 popSim=function(t,y,p){
@@ -43,7 +47,7 @@ for (i in 1:length(rList[1,])){
 
 modelPopSimOutput_m=melt(modelPopSimOutput)
 
-ggplot()+
+results1 = ggplot()+
   geom_line(data = modelPopSimOutput_m[modelPopSimOutput_m$Var2 != 1,], aes(x = Var1, y = value, group=Var2, color=factor(Var2)))+
   labs(title="Constant K with Varying r Values", x="time", y="N")
 
@@ -65,7 +69,7 @@ for (i in 1:length(KList[1,])){
 
 modelPopSimOutput_m=melt(modelPopSimOutput)
 
-ggplot()+
+results2 = ggplot()+
   geom_line(data = modelPopSimOutput_m[modelPopSimOutput_m$Var2 != 1,], aes(x = Var1, y = value, group=Var2, color=factor(Var2)))+
   labs(title="Constant r with Varying K Values", x="time", y="N")
 
@@ -87,7 +91,7 @@ for (i in 1:length(NList[1,])){
 
 modelPopSimOutput_m=melt(modelPopSimOutput)
 
-ggplot()+
+results3 = ggplot()+
   geom_line(data = modelPopSimOutput_m[modelPopSimOutput_m$Var2 != 1,], aes(x = Var1, y = value, group=Var2, color=factor(Var2)))+
   labs(title="Constant K and r with Varying N0 Values", x="time", y="N")
 
@@ -105,7 +109,7 @@ SIRmodel <- function (t,y,p){
   
   beta = p[1]
   gamma = p[2]
-
+  
   
   dS_dt = -beta*I*S
   dI_dt = beta*I*S - gamma*I
@@ -253,7 +257,6 @@ RESULTS <- rbind(RESULTS, "Case 7" = c(params7[1],params7[2],mdi,mdp,pa,bpn))
 
 ###Plotting the results - add the number to "modelOutput" that you want to plot
 #plot2 <- ggplot(modelOutput) + 
-  #geom_line(aes(x = time, y = S), colour = "blue") + 
-  #geom_line(aes(x = time, y = I), colour = "grey") + 
-  #geom_line(aes(x = time, y = R), colour = "red")
-
+#geom_line(aes(x = time, y = S), colour = "blue") + 
+#geom_line(aes(x = time, y = I), colour = "grey") + 
+#geom_line(aes(x = time, y = R), colour = "red")
