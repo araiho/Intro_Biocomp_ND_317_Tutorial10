@@ -145,9 +145,9 @@ ggplot() + geom_line(data=modelOutput_N0,aes(x=time,y=P1)) +
 ## Question 2
 
 library(deSolve)
-library(ggplot2)
-library(gridExtra)
 
+
+# SIR model
 sir <- function(t, y, p){
   S=y[1]
   I=y[2]
@@ -162,121 +162,14 @@ sir <- function(t, y, p){
   return(list(c(dSdt,dIdt,dRdt)))
 }
 
-params=c(0.0005,0.05)
-init=c(999,1,0)
-times=c(1:500)
-
-modelsim = ode(y=init, times=times, func=sir, parms=params)
-modeloutput1 = data.frame(time=modelsim[,1], S=(modelsim[,2]), I=(modelsim[,3]), R=(modelsim[,4]))
-calcs = 
-  a<-ggplot()+
-  theme_classic()+
-  geom_line(data=modeloutput,aes(x=modeloutput1$time,y=modeloutput1$S),color="red")+
-  geom_line(data=modeloutput,aes(x=modeloutput1$time,y=modeloutput1$I),color="blue")+
-  geom_line(data=modeloutput,aes(x=modeloutput1$time,y=modeloutput1$R),color="green")
-a                         
 
 
-params=c(0.005,0.5)
-init=c(999,1,0)
-times=c(1:500)
+# Exploring with the given parameters, plus some additional
 
-modelsim = ode(y=init, times=times, func=sir, parms=params)
-modeloutput2 = data.frame(time=modelsim[,1], S=(modelsim[,2]), I=(modelsim[,3]), R=(modelsim[,4]))
-b<-ggplot()+
-  theme_classic()+
-  geom_line(data=modeloutput,aes(x=modeloutput2$time,y=modeloutput2$S),color="red")+
-  geom_line(data=modeloutput,aes(x=modeloutput2$time,y=modeloutput2$I),color="blue")+
-  geom_line(data=modeloutput,aes(x=modeloutput2$time,y=modeloutput2$R),color="green")
-
-b  
-
-params=c(0.0001,0.1)
-init=c(999,1,0)
-times=c(1:500)
-
-modelsim = ode(y=init, times=times, func=sir, parms=params)
-modeloutput3 = data.frame(time=modelsim[,1], S=(modelsim[,2]), I=(modelsim[,3]), R=(modelsim[,4]))
-c<-ggplot()+
-  theme_classic()+
-  geom_line(data=modeloutput,aes(x=modeloutput3$time,y=modeloutput3$S),color="red")+
-  geom_line(data=modeloutput,aes(x=modeloutput3$time,y=modeloutput3$I),color="blue")+
-  geom_line(data=modeloutput,aes(x=modeloutput3$time,y=modeloutput3$R),color="green")
-
-c 
-
-params=c(0.00005,0.1)
-init=c(999,1,0)
-times=c(1:500)
-
-modelsim = ode(y=init, times=times, func=sir, parms=params)
-modeloutput4 = data.frame(time=modelsim[,1], S=(modelsim[,2]), I=(modelsim[,3]), R=(modelsim[,4]))
-d<-ggplot()+
-  theme_classic()+
-  geom_line(data=modeloutput,aes(x=modeloutput4$time,y=modeloutput4$S),color="red")+
-  geom_line(data=modeloutput,aes(x=modeloutput4$time,y=modeloutput4$I),color="blue")+
-  geom_line(data=modeloutput,aes(x=modeloutput4$time,y=modeloutput4$R),color="green")
-
-d 
-
-params=c(0.0001,0.05)
-init=c(999,1,0)
-times=c(1:500)
-
-modelsim = ode(y=init, times=times, func=sir, parms=params)
-modeloutput5 = data.frame(time=modelsim[,1], S=(modelsim[,2]), I=(modelsim[,3]), R=(modelsim[,4]))
-e<-ggplot()+
-  theme_classic()+
-  geom_line(data=modeloutput,aes(x=modeloutput5$time,y=modeloutput5$S),color="red")+
-  geom_line(data=modeloutput,aes(x=modeloutput5$time,y=modeloutput5$I),color="blue")+
-  geom_line(data=modeloutput,aes(x=modeloutput5$time,y=modeloutput5$R),color="green")
-
-e 
-
-params=c(0.0002,0.05)
-init=c(999,1,0)
-times=c(1:500)
-
-modelsim = ode(y=init, times=times, func=sir, parms=params)
-modeloutput6 = data.frame(time=modelsim[,1], S=(modelsim[,2]), I=(modelsim[,3]), R=(modelsim[,4]))
-f<-ggplot()+
-  theme_classic()+
-  geom_line(data=modeloutput,aes(x=modeloutput6$time,y=modeloutput6$S),color="red")+
-  geom_line(data=modeloutput,aes(x=modeloutput6$time,y=modeloutput6$I),color="blue")+
-  geom_line(data=modeloutput,aes(x=modeloutput6$time,y=modeloutput6$R),color="green")
-
-f 
-
-params=c(0.0001,0.06)
-init=c(999,1,0)
-times=c(1:500)
-
-modelsim = ode(y=init, times=times, func=sir, parms=params)
-modeloutput7 = data.frame(time=modelsim[,1], S=(modelsim[,2]), I=(modelsim[,3]), R=(modelsim[,4]))
-g<-ggplot()+
-  theme_classic()+
-  geom_line(data=modeloutput,aes(x=modeloutput7$time,y=modeloutput7$S),color="red")+
-  geom_line(data=modeloutput,aes(x=modeloutput7$time,y=modeloutput7$I),color="blue")+
-  geom_line(data=modeloutput,aes(x=modeloutput7$time,y=modeloutput7$R),color="green")
-
-g 
-
-
-grid.arrange(a,b,c,d,e,f,g,nrow=4,ncol=2) 
-
-# What patterns do we see in the results?
-# In parameter sets 3 and 4 the infection never takes off because the population slow becomes resistant
-# In parameter sets 1, 2, and the infection is really fast, with the population transitioning through the 
-# SIR stages in the first 100 days
-# In parameter sets 5 and 7 the infection is more drawn-out, with the number of suseptible within the
-# population never reaching zero during 500 days
-
-
-# Exploring basic reproduction number
-beta<-c(0.0005,0.005,0.0001,0.00005,0.0001,0.0002,0.0001,0.5,0.9,0.1,0.1,0.00005)
-gamma<-c(0.05,0.5,0.1,0.1,0.05,0.05,0.06,0.1,0.1,0.5,0.9,0.00005)
-results<-matrix(0,nrow = length(beta),ncol = 3)
-colnames(results)<-c("Beta","Gamma","BRN")
+beta<-c(0.0005,0.005,0.0001,0.00005,0.0001,0.0002,0.0001,0.5,0.0000005,0.0000001,10,1)
+gamma<-c(0.05,0.5,0.1,0.1,0.05,0.05,0.06,0.5,0.0000005,0.1,1,10)
+results<-matrix(0,nrow = length(beta),ncol = 6)
+colnames(results)<-c("Beta","Gamma","Max Daily Incidence","Max Daily Prevalence","Percent Affected","Basic Reproduction #")
 
 for (i in 1:length(beta)){
   params=c(beta[i],gamma[i])
@@ -285,10 +178,23 @@ for (i in 1:length(beta)){
   
   modelsim = ode(y=init, times=times, func=sir, parms=params)
   modeloutput = data.frame(time=modelsim[,1], S=(modelsim[,2]), I=(modelsim[,3]), R=(modelsim[,4]))
+  for (j in 1:length(modeloutput)){
+    modeloutput$incidence[j] = modeloutput$I[j+1]-modeloutput$I[j]
+    modeloutput$prevalence[j] = modeloutput$I[j]/(modeloutput$S[j]+modeloutput$I[j]+modeloutput$R[j])
+    modeloutput$percentaffect[j] = (modeloutput$I[j]+modeloutput$R[j])/(modeloutput$S[j]+modeloutput$I[j]+modeloutput$R[j])
+  }
   results[i,1] = beta[i]
   results[i,2] = gamma[i]
-  results[i,3] = (beta[i]*(modeloutput$S[i]+modeloutput$I[i]+modeloutput$R[i]))/gamma[i]
+  results[i,3] = max(modeloutput$incidence)
+  results[i,4] = max(modeloutput$prevalence)
+  results[i,5] = modeloutput$percentaffect[500]
+  results[i,6] = (beta[i]*(modeloutput$S[1]+modeloutput$I[1]+modeloutput$R[1]))/gamma[i]
 }
+results
+
+
+
+
 
 
 
