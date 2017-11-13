@@ -145,6 +145,7 @@ ggplot() + geom_line(data=modelOutput_N0,aes(x=time,y=P1)) +
 ## Question 2
 
 library(deSolve)
+library(gridExtra)
 
 
 # SIR model
@@ -192,14 +193,34 @@ for (i in 1:length(beta)){
 }
 results
 
+# Plots to see effects of beta and gamma on each disease variable
+incid<-ggplot()+
+        theme_classic()+
+        geom_line(aes(x=results[,1], y=results[,3]), color='red')+
+        geom_line(aes(x=results[,2], y=results[,3]), color='blue')+
+        labs(x="Red=Beta, Blue=Gamma",y="Max Incidence")
+incid
 
+prev<-ggplot()+
+        theme_classic()+
+        geom_line(aes(x=results[,1], y=results[,4]), color='red')+
+        geom_line(aes(x=results[,2], y=results[,4]), color='blue')+
+        labs(x="Red=Beta, Blue=Gamma",y="Max Prevalence")
+prev   
 
+pa<-ggplot()+
+      theme_classic()+
+      geom_line(aes(x=results[,1], y=results[,5]), color='red')+
+      geom_line(aes(x=results[,2], y=results[,5]), color='blue')+
+      labs(x="Red=Beta, Blue=Gamma",y="Percent Affected")
+pa
 
+R0<-ggplot()+
+      theme_classic()+
+      geom_line(aes(x=results[,1], y=results[,6]), color='red')+
+      geom_line(aes(x=results[,2], y=results[,6]), color='blue')+
+      labs(x="Red=Beta, Blue=Gamma",y="Basic Reproduction #")
+R0
 
-
-
-
-
-
-
+grid.arrange(incid,prev,pa,R0, nrow=2,ncol=2)
 
